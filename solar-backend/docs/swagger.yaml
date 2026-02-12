@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: SolarStream IoT API
+  description: Real-time telemetry API for the portable solar power station project.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /api/v1/telemetry:
+    get:
+      summary: Get Latest Solar Telemetry
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  voltage:
+                    type: number
+                  current:
+                    type: number
+    post:
+      summary: Upload Solar Telemetry
+      description: Receives voltage and current data from the ESP32 and syncs it to Firebase.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deviceId
+                - voltage
+                - current
+              properties:
+                deviceId:
+                  type: string
+                  example: "solar_node_01"
+                voltage:
+                  type: number
+                  format: float
+                  example: 12.6
+                current:
+                  type: number
+                  format: float
+                  example: 1.2
+      responses:
+        200:
+          description: Data successfully synced to Firebase
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+        400:
+          description: Invalid request - missing required fields
+        500:
+          description: Internal server error - Firebase sync failed
