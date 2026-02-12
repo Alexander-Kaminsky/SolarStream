@@ -1,5 +1,3 @@
-Here is a professional README designed for your GitHub, written in your voice and tailored for the Yazamco interview. It explains the "Tachles" of how you built this full-stack IoT ecosystem in record time.
-
 ☀️ SolarStream IoT
 A full-stack monitoring system for a portable solar power station, built as a Rapid Prototype to demonstrate integration between hardware telemetry, cloud middleware, and reactive mobile UI.
 
